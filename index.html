@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html {
+            padding: 40px;
+            font-family: Arial;
+            font-size: 20px;
+        }
+
+        .btn {
+            background-color: red;
+            border-radius: 10px;
+            text-align: center;
+            width: 140px;
+            padding: 15px;
+            margin: 0 auto;
+            color: #ffffff;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: darkred;
+        }
+        #messege {
+            text-align: center;
+        }
+        #gameboard {
+            text-align: center;
+        }
+        .gameTile {
+            display: inline-block;
+        }
+        .flipImage {
+            max-width: 250px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="output" style="text-align: center; margin-bottom: 100px"><h1>JavaScript Course</h1></div>
+    <div id="wrapper">
+        <div id="start" class="btn">Start Game</div>
+        <div id="messege"><h2></h2></div>
+        <div id="score"></div>
+        <div id="gameboard"></div>
+    </div>
+
+    <script>
+        // on/off switches
+        var playLockOut = false;
+        var gamePlay    = false;
+
+        // all divs id's
+        var start       = document.getElementById('start');
+        var messege     = document.getElementById('messege');
+        var score       = document.getElementById('score');
+        var gameBoard   = document.getElementById('gameboard');
+
+        // generate tiles Arrays
+        var
+            tileImages      = [],
+            tileArray       = [],
+            tileFlippedOver = [];
+
+        start.addEventListener('click', startGame);
+
+        function startGame() {
+            if (!gamePlay) {
+                gamePlay = true;
+            }
+            start.style.display = 'none';
+            messege.children[0].innerHTML = "Good Luck!";
+            // build Array for tiles
+            buildArray(tileImages);
+            tileArray = tileImages.concat(tileImages);
+            // shuffle tiles
+            shuffleArray(tileArray);
+            // build board
+            buildBoard();
+        }
+
+        function buildArray(array) {
+            for (let x = 1; x < 7; x++) {
+                array.push(x+'.jpg');
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i=array.length-1; i>0; i--) {
+                randomItem = Math.floor(Math.random()*(i+1));
+                valueItem = array[i];
+                array[i] = array[randomItem];
+                array[randomItem] = valueItem;
+            }
+            return array;
+        }
+        function buildBoard() {
+            var html = '';
+            var x = 0;
+            tileArray.forEach(function (element) {
+                x++;
+                html += '<div class="gameTile">';
+                html += '<img id="cardz'+x+'" src="https://via.placeholder.com/250/000000/ffffff?text=click" ' +
+                    'onclick="pickCard('+x+',this)" class="flipImage"></div>';
+            });
+            gameBoard.innerHTML = html;
+        }
+
+    </script>
+
+</body>
+</html>
