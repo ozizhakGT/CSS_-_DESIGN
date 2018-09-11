@@ -39,6 +39,10 @@
             max-width: 200px;
             padding: 2px;
         }
+        #score {
+            text-align: center;
+            padding: 30px 0;
+        }
     </style>
 </head>
 <body>
@@ -56,6 +60,9 @@
         var gamePlay    = false;
         var flippedCard = -1;
         var timer;
+        var totalTry = 0;
+        var trys = 0;
+        var points = 0;
         // all divs id's
         var start       = document.getElementById('start');
         var messege     = document.getElementById('messege');
@@ -71,11 +78,13 @@
         start.addEventListener('click', startGame);
 
         function startGame() {
+            messege.innerHTMLs = '';
             if (!gamePlay) {
                 gamePlay = true;
             }
             start.style.display = 'none';
             messege.children[0].innerHTML = "Good Luck!";
+            score.innerHTML = 'Points: ' + points;
             // build Array for tiles
             buildArray(tileImages);
             tileArray = tileImages.concat(tileImages);
@@ -120,10 +129,21 @@
                     // check to if its a match
                     if (checkSrc(tileFlippedOver[tileFlippedOver.length - 1]) == checkSrc(tileFlippedOver[tileFlippedOver.length - 2])) {
                         messege.innerHTML = 'Match Found!';
+                        if (trys === 0) {
+                            points += 3
+                            trys++
+                        } else {
+                            points += 1
+                            trys++
+                        }
+                        totalTry += trys;
+                        trys = 0;
+                        score.innerHTML = 'Points: ' + points;
                         flippedCard = -1;
                         playLockOut = false;
                     }
                     else {
+                        trys++;
                         messege.innerHTML = 'No Match';
                         timer = setInterval(hideCard, 1000);
                     }
@@ -139,6 +159,9 @@
                     else {
                         messege.innerHTML = 'Locked Out'
                     }
+            }
+            if (tileFlippedOver.length === tileArray.length) {
+                gameOver();
             }
         }
         function filpCard(i,t) {
@@ -162,6 +185,15 @@
         }
         function isInArray(value,array) {
             return array.indexOf(value) > -1;
+        }
+        function gameOver() {
+            start.style.display = 'block';
+            tileImages = [];
+            tileArray = [];
+            tileFlippedOver = [];
+            gameBoard.innerHTML = '';
+            points = 0;
+            messege.innerHTML = '<h2>you finish the game:)</h2><br>Total Trying: '+totalTry;
         }
 
     </script>
