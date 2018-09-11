@@ -34,6 +34,7 @@
         }
         .gameTile {
             display: inline-block;
+            border-radius: 4xp;
         }
         .flipImage {
             max-width: 200px;
@@ -78,12 +79,11 @@
         start.addEventListener('click', startGame);
 
         function startGame() {
-            messege.innerHTMLs = '';
             if (!gamePlay) {
                 gamePlay = true;
             }
             start.style.display = 'none';
-            messege.children[0].innerHTML = "Good Luck!";
+            messege.innerHTML = "Good Luck!";
             score.innerHTML = 'Points: ' + points;
             // build Array for tiles
             buildArray(tileImages);
@@ -127,7 +127,7 @@
                     filpCard(i, t);
                     playLockOut = true;
                     // check to if its a match
-                    if (checkSrc(tileFlippedOver[tileFlippedOver.length - 1]) == checkSrc(tileFlippedOver[tileFlippedOver.length - 2])) {
+                    if (checkSrc(tileFlippedOver[tileFlippedOver.length - 1]) == checkSrc(tileFlippedOver[tileFlippedOver.length -2])) {
                         messege.innerHTML = 'Match Found!';
                         if (trys === 0) {
                             points += 3
