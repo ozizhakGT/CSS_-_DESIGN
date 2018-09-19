@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="data.json"></script>
+    <style>
+        html {
+            font-family: Arial;
+        }
+        .toggle {
+            padding: 10px;
+            background-color: lightpink;
+            font-size: 1.3em;
+            margin: 10px;
+        }
+        .active {
+            background-color: aquamarine;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="output">Patry!:)</div>
+Guest invatation: <input type="text" name="" id="guestName">
++ <input type="number" id="guestNum" value="0" min="0" max="5">
+<input type="button" value="Invite">
+<script>
+
+    var party = [];
+    localStorage.setItem('party',data);
+    var output = document.getElementById('output');
+
+    window.onload = buildList;
+
+    var guestName = document.getElementById('guestName');
+    var guestNum = document.getElementById('guestNum');
+    var addGuest = document.querySelector("input[type='button']");
+
+    function buildList() {
+        if (localStorage.getItem('party')) {
+            party = JSON.parse(localStorage.getItem('party'))
+        }
+        else {
+            party = JSON.parse(data);
+        }
+        console.log(party);
+        for (let i = 0; i < party.length; i++) {
+            console.log(party[i])
+            var person = party[i].name + '+' + party[i].guest;
+            if (party[i].status) {
+                message('V-',person,i,'active');
+            }
+            else {
+                message('X-',person,i,'');
+            }
+        }
+    }
+
+    function message(mes,person,id,c) {
+        output.innerHTML += "<div class='toggle "+c+"' data-id='"+id+"' data-person='"+person+"'><span>"+mes+"</span>"+person+"</div>";
+    }
+
+    addGuest.addEventListener('click',function () {
+        message('X-',guestName.value + '+' + guestNum.value, party.length,'toggle');
+        party.push({
+            name: guestName.value,
+            guest: parseInt(guestNum.value),
+            status: false
+        });
+        localStorage.setItem('party',JSON.stringify(party));
+        console.log(party);
+        guestName.value = '';
+        guestNum.value = 0;
+    });
+
+    output.addEventListener('click', function (e) {
+        if (e.target.dataset.id) {
+            el = e.target;
+            var ds = el.dataset;
+            el.classList.toggle('active');
+            el.children[0].innerHTML = el.children[0].innerHTML == 'V-' ? 'X-' : 'V-';
+            console.log(el.children[0].innerHTML)
+            party[ds.id].status = party[ds.id].status == true ? false : true;
+            console.log(party[ds.id])
+            localStorage.setItem('party',JSON.stringify(party));
+        }
+    })
+
+
+</script>
+</body>
+</html>
