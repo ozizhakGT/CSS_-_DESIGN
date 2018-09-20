@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="data.json"></script>
+    <!--<script src="data.json"></script>-->
     <style>
         html {
             font-family: Arial;
@@ -31,25 +31,36 @@ Guest invatation: <input type="text" name="" id="guestName">
 <script>
 
     var party = [];
-    localStorage.setItem('party',data);
     var output = document.getElementById('output');
 
-    window.onload = buildList;
+    window.onload = init();
 
     var guestName = document.getElementById('guestName');
     var guestNum = document.getElementById('guestNum');
     var addGuest = document.querySelector("input[type='button']");
 
+    function init() {
+        partyListsService(function (response) {
+            party = JSON.parse(response);
+            buildList();
+            localStorage.setItem('party',response);
+        });
+    }
+    function partyListsService(callback) {
+        var xHR = new XMLHttpRequest;
+        xHR.open('get','https://api.myjson.com/bins/f7230',true);
+        xHR.send();
+        xHR.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                callback(this.responseText);
+            } else {
+                return false;
+            }
+        };
+    }
+
     function buildList() {
-        if (localStorage.getItem('party')) {
-            party = JSON.parse(localStorage.getItem('party'))
-        }
-        else {
-            party = JSON.parse(data);
-        }
-        console.log(party);
         for (let i = 0; i < party.length; i++) {
-            console.log(party[i])
             var person = party[i].name + '+' + party[i].guest;
             if (party[i].status) {
                 message('V-',person,i,'active');
@@ -72,7 +83,6 @@ Guest invatation: <input type="text" name="" id="guestName">
             status: false
         });
         localStorage.setItem('party',JSON.stringify(party));
-        console.log(party);
         guestName.value = '';
         guestNum.value = 0;
     });
@@ -83,9 +93,7 @@ Guest invatation: <input type="text" name="" id="guestName">
             var ds = el.dataset;
             el.classList.toggle('active');
             el.children[0].innerHTML = el.children[0].innerHTML == 'V-' ? 'X-' : 'V-';
-            console.log(el.children[0].innerHTML)
             party[ds.id].status = party[ds.id].status == true ? false : true;
-            console.log(party[ds.id])
             localStorage.setItem('party',JSON.stringify(party));
         }
     })
