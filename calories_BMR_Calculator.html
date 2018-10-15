@@ -7,7 +7,18 @@
         html {
             font-family: Arial;
             font-size: 25px;
-            padding: 50px;
+            background: lightgray;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-border {
+            border: 1px #92c0e4 solid;
+            background-color: #92c0e4;
+            border-radius: 7px;
+            width: 380px;
+            text-align: center;
+            margin: 40px auto;
         }
         div {
             padding: 10px 0;
@@ -18,42 +29,62 @@
             font-weight: bolder;
             line-height: 0px;
         }
+        #resultBtn {
+            background-color: lightgray;
+            border-radius: 3px;
+
+        }
+        #result {
+            display: none;
+            margin: 0 auto;
+            text-align: center;
+            border: 0.5px solid #9cea9c;
+            background-color: #9cea9c;
+            width: 150px;
+            border-radius: 50px;
+        }
     </style>
 </head>
 <body>
-    <form id="myForm">
-        <div>
-            Female<input type="radio" id="female" name="gender">
-            Male<input type="radio" id="male" name="gender">
-        </div>
-        <div>
-            <label for="weight">Weight:</label>
-            <input type="number" id="weight" placeholder="in pounds"> lbs
-        </div>
-        <div>
-            <label for="heightFeet">Height:</label>
-            <input type="number" id="heightFeet" placeholder="in feet" min="0" max='9999999'> Feet
-            <p>-AND-</p>
-            <label for="heightInches">Height:</label>
-            <input type="number" id="heightInches" placeholder="in inches" max="11" min="0"> Inches
-        </div>
-        <div>
-            <label for="age">Age:</label>
-            <input type="number" id="age" min="0"> years old
-        </div>
-        <div>
-            <label for="lifeStyle">Life Style:</label>
-            <input type="number" id="lifeStyle" value="1" min="1" max="5"> <span>1=Low Activity | 5=High Activity</span>
-        </div>
-        <input id="hara" type="button" value="Result">
-    </form>
+<h2>BMR Calculator</h2>
+    <div class="form-border">
+        <form id="myForm">
+            <div>
+                Female<input type="radio" id="female" name="gender">
+                Male<input type="radio" id="male" name="gender">
+            </div>
+            <div>
+                <label for="weight">Weight:</label>
+                <input type="number" id="weight" placeholder="in pounds"> lbs
+            </div>
+            <div>
+                <label for="heightFeet">Height:</label>
+                <input type="number" id="heightFeet" placeholder="in feet" min="0" max='9999999'> Feet
+                <p>-AND-</p>
+                <label for="heightInches">Height:</label>
+                <input type="number" id="heightInches" placeholder="in inches" max="11" min="0"> Inches
+            </div>
+            <div>
+                <label for="age">Age:</label>
+                <input type="number" id="age" min="0"> years old
+            </div>
+            <div>
+                <label for="lifeStyle">Life Style:</label>
+                <input type="number" id="lifeStyle" value="1" min="1" max="5"> <span>1=Low Activity | 5=High Activity</span>
+            </div>
+            <input id="resultBtn" type="button" value="Result">
+        </form>
+    </div>
     <div id="result"></div>
 
     <script>
         document.forms.myForm.onchange = outputCal;
         function outputCal() {
-            document.getElementById('hara').onclick = function () {
-                document.getElementById('result').innerHTML = BMRResault
+            document.getElementById('resultBtn').onclick = function () {
+                document.getElementById('result').innerHTML = Math.floor(BMRResault);
+                document.getElementById('result').style.display = 'block';
+                document.querySelector('.form-border').style.backgroundColor = '#9cea9c';
+                document.querySelector('.form-border').style.borderColor = '#9cea9c';
             }
                 // console.dir(this)
             // console.log(event.target);
