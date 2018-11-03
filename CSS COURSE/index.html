@@ -13,6 +13,7 @@
         <figure>
             <img src="shark.png">
         </figure>
+        <div class="mobile-menu-icon"><img class="mobile-menu-icon  " src="Hamburger_icon.svg.png" alt=""></div>
             <ul class="primary-nav">
                 <li><a href="#">Home</a></li>
                 <li class="has-submeue"><a href="#">Movies</a>
@@ -33,7 +34,7 @@
         <a href="" class="button button-narrow">Learn More</a>
         <a href="" class="button button-narrow">Learn More</a>
         <div class="img-animation">
-            <img src="nba-icon.favicon.png" alt="">
+            <img class="nba-img" src="nba-icon.favicon.png" alt="">
         </div>
     </div>
     <div class="text-block">
@@ -44,6 +45,14 @@
     <div class="go-premium">
         <a class="go" href="#">Go Premium</a>
         <p>So many bla bla <a href="#">Learn more.. &raquo</a></p>
+        <script>
+            (function () {
+                document.querySelector('.mobile-menu-icon').addEventListener('click', function (e) {
+                    console.log(this);
+                    document.querySelector('.primary-nav').classList.toggle('active');
+                })
+            })();
+        </script>
     </div>
 </body>
 </html>
