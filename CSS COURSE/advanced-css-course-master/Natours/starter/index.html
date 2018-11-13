@@ -15,7 +15,9 @@
     <body>
         <div class="navigation">
             <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
-            <label for="navi-toggle" CLASS="navigation__button">MENU</label>
+            <label for="navi-toggle" CLASS="navigation__button">
+                <span class="navigation__icon">&nbsp;</span>
+            </label>
 
             <div class="navigation__background">&nbsp;</div>
 
@@ -105,7 +107,7 @@
                     </div>
                 </div>
             </section>
-            <section class="section-tours">
+            <section class="section-tours" id="section-tours">
                 <div class="u-center-text u-margin-bottom-big">
                     <h2 class="heading-secondary">
                         Most popular tours
@@ -139,7 +141,7 @@
                                         <p class="card__price-only">Only</p>
                                         <p class="card__price-value">$297</p>
                                     </div>
-                                    <a href="" class="btn btn--white">Book Now</a>
+                                    <a href="#popup" class="btn btn--white">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +173,7 @@
                                         <p class="card__price-only">Only</p>
                                         <p class="card__price-value">$482</p>
                                     </div>
-                                    <a href="" class="btn btn--white">Book Now</a>
+                                    <a href="#popup" class="btn btn--white">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +205,7 @@
                                         <p class="card__price-only">Only</p>
                                         <p class="card__price-value">$667</p>
                                     </div>
-                                    <a href="" class="btn btn--white">Book Now</a>
+                                    <a href="#popup" class="btn btn--white">Book Now</a>
                                 </div>
                             </div>
                         </div>
@@ -320,7 +322,23 @@
                     </div>
                 </div>
         </footer>
-
+        <div class="popup" id="popup">
+            <div class="popup__content">
+                <div class="popup__left">
+                    <img src="img/nat-8.jpg" alt="tour poto" class="popup__img">
+                    <img src="img/nat-9.jpg" alt="tour poto" class="popup__img">
+                </div>
+                <div class="popup__right">
+                    <a href="#section-tours" class="popup__close">&times;</a>
+                    <h2 class="heading-secondary u-margin-bottom-medium">Start booking now</h2>
+                    <h3 class="heading-tertiary u-margin-bottom-small">Important &ndash; Please read this terms before booking</h3>
+                    <p class="popup__text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisi scelerisque eu ultrices vitae auctor eu augue. Semper feugiat nibh sed pulvinar proin gravida hendrerit lectus a. Consequat nisl vel pretium lectus quam id leo in vitae. Sodales neque sodales ut etiam sit. Dui ut ornare lectus sit amet. Est placerat in egestas erat imperdiet sed euismod nisi porta. Posuere lorem ipsum dolor sit amet consectetur. Sit amet cursus sit amet dictum sit amet justo. In egestas erat imperdiet sed euismod. Sapien nec sagittis aliquam malesuada bibendum. Faucibus ornare suspendisse sed nisi lacus. Egestas purus viverra accumsan in nisl. Vulputate enim nulla aliquet porttitor lacus luctus. Felis imperdiet proin fermentum leo.
+                    </p>
+                    <a href="#" class="btn btn--green">Book now</a>
+                </div>
+            </div>
+        </div>
         <!--
         <section>
             <div class="row">
