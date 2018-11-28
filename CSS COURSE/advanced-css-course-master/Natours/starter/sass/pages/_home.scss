@@ -20,6 +20,10 @@
   transform: skewy(-7deg);
   margin-top: -11rem;
 
+  @include respond(tab-port) {
+    padding: 10rem 0;
+  }
+
   & > * {
     transform: skewy(7deg);
   }
